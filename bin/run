@@ -1,26 +1,120 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
+# bin/run — Main entry point for Bashsmith projects.
+# Sources settings first, then uses Gum adapter for all TUI interactions.
 
-# DESCRIPTION
-# Executes the script.
-
-# SETTINGS
+# SETTINGS — must be first so strict mode is inherited
 source settings/main.sh
 
-# LIBRARY
-source lib/cli.sh
+# LIBRARIES — monad.sh and gum.sh are always loaded
+source "${BASHSMITH_LIB}/monad.sh"
 
-# EXECUTION
-while true; do
-  if [[ $# == 0 ]]; then
-    printf "\nUsage: run OPTION\n"
-    printf "\nScript Options:\n"
-    printf "  q: Quit/Exit.\n\n"
-    read -r -p "Enter selection: " response
-    printf "\n"
-    process_option "$response"
+# Gum adapter — skip if gum is not installed (read fallback is used)
+if command -v gum &>/dev/null; then
+  source "${BASHSMITH_LIB}/gum.sh"
+  HAVE_GUM=1
+else
+  HAVE_GUM=0
+fi
+
+# ── Menu items ─────────────────────────────────────────────────────────────────
+# Format: "label:description"
+MENU_ITEMS=(
+  "bashsmith:Generate a new Bash project from the template"
+  "refactor:Refactor existing Bash code to bashsmithing conventions"
+  "report:Run a SIFT QA audit on Bash code"
+  "tui:Build a TUI application with gum"
+  "context:Look up CLI tool documentation (jq, fzf, gum, gh)"
+  "quit:Exit this application"
+)
+
+# ── Menu display ────────────────────────────────────────────────────────────────
+# Uses gum choose if available, read-based fallback otherwise.
+Bashsmith::menu() {
+  if [[ "$HAVE_GUM" == "1" ]]; then
+    printf '%s\n' "${MENU_ITEMS[@]}" \
+      | gum choose \
+        --header "Bashsmith — What would you like to do?" \
+        --cursor "> " \
+        --cursor.foreground "${BASHSMITH_GUM_COLOR_PRIMARY:-212}" \
+        --selected.foreground 82
   else
-    process_option "$1"
+    local i=1
+    printf '\nBashsmith — What would you like to do?\n\n'
+    for item in "${MENU_ITEMS[@]}"; do
+      printf '  %d. %s\n' "$i" "${item%%:*}"
+      i=$((i + 1))
+    done
+    printf '\n'
+    read -r -p "Enter selection: " num
+    local idx=$((num - 1))
+    echo "${MENU_ITEMS[$idx]:-quit}"
+  fi
+}
+
+# ── Main ───────────────────────────────────────────────────────────────────────
+Bashsmith::main() {
+  local choice
+  Gum::catch_ctrlc 2>/dev/null || true
+
+  choice=$(Bashsmith::menu) || {
+    [[ "$HAVE_GUM" == "1" ]] && gum style --foreground 196 "Interrupted."
+    return 130
+  }
+
+  if [[ -z "$choice" ]]; then
+    gum style --foreground 240 "No selection made."
+    return 1
   fi
 
-  break
-done
+  local action="${choice%%:*}"
+
+  case "$action" in
+    bashsmith) Bashsmith::generate ;;
+    refactor)  Bashsmith::refactor ;;
+    report)    Bashsmith::report ;;
+    tui)       Bashsmith::tui ;;
+    context)   Bashsmith::context ;;
+    quit)      return 0 ;;
+    *)
+      gum style --foreground 196 "Unknown option: ${action}"
+      return 1
+      ;;
+  esac
+}
+
+# ── Command stubs ──────────────────────────────────────────────────────────────
+# These delegate to the bashsmithing-* skills. The full implementation
+# activates the respective SKILL.md when this project is loaded as a skill.
+
+Bashsmith::generate() {
+  if [[ "$HAVE_GUM" == "1" ]]; then
+    gum spin --title "Scaffolding new Bash project..." -- sleep 1
+  fi
+  gum style --foreground 82 "✓ bashsmithing: scaffold"
+  echo "(Invoke bashsmithing/SKILL.md)"
+}
+
+Bashsmith::refactor() {
+  gum style --foreground 82 "✓ bashsmithing-refactor: refactor"
+  echo "(Invoke bashsmithing-refactor/SKILL.md)"
+}
+
+Bashsmith::report() {
+  gum style --foreground 82 "✓ bashsmithing-report: SIFT audit"
+  echo "(Invoke bashsmithing-report/SKILL.md)"
+}
+
+Bashsmith::tui() {
+  gum style --foreground 82 "✓ bashsmithing-tui: build TUI"
+  echo "(Invoke bashsmithing-tui/SKILL.md)"
+}
+
+Bashsmith::context() {
+  gum style --foreground 82 "✓ bashsmithing-context: CLI docs"
+  echo "(Invoke bashsmithing-context/SKILL.md)"
+}
+
+# ── Bootstrap ─────────────────────────────────────────────────────────────────
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+  Bashsmith::main "$@"
+fi
