@@ -1,14 +1,11 @@
-# 🛠️ Bashsmith
+# 🛠️ Bashsmithing Skills
 
 [![Shellcheck](https://img.shields.io/badge/shellcheck-passed-brightgreen.svg)](https://www.shellcheck.net/)
 [![BATS](https://img.shields.io/badge/tests-BATS-blue.svg)](https://github.com/bats-core/bats-core)
-[![License](https://img.shields.io/badge/license-Hippocratic_2.1-red.svg)](LICENSE.adoc)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bash](https://img.shields.io/badge/bash-4.0%2B-orange.svg)](https://www.gnu.org/software/bash)
 
-**Bashsmith** is a professional-grade project template and AI-powered skill suite for crafting robust, production-ready Bash scripts. It bridges the gap between "quick-and-dirty" scripts and reliable, maintainable software by enforcing strict-mode settings, JSON-based return monads, and a modular TUI architecture.
-
-> [!IMPORTANT]
-> This project is licensed under the **Hippocratic License 2.1.0**, an Ethical Source license that prohibits the use of this software for activities that violate human rights. See [LICENSE.adoc](LICENSE.adoc) for full terms.
+**Bashsmithing Skills** is a specialized AI-powered skill suite and project template for crafting robust, production-ready Bash scripts. It bridges the gap between "quick-and-dirty" scripts and reliable, maintainable software by enforcing strict-mode settings, JSON-based return monads, and a modular TUI architecture.
 
 > [!NOTE]
 > This project is a specialized derivative based on the [Bashsmith](https://github.com/bkuhlmann/bashsmith) template. While it inherits the core architecture and philosophy of the original, it is maintained as a separate project focused on the Bashsmithing AI skill suite.
@@ -43,8 +40,8 @@ sudo apt install jq shellcheck
 ### Installation
 
 ```bash
-git clone https://github.com/bkuhlmann/bashsmith.git
-cd bashsmith
+git clone https://github.com/b08x/bashsmithing-skills.git
+cd bashsmithing-skills
 ./bin/run
 ```
 
@@ -52,7 +49,7 @@ cd bashsmith
 
 ## 🏗️ Architecture
 
-Every Bashsmith script follows a standardized three-step bootstrap process:
+Every Bashsmithing script follows a standardized three-step bootstrap process:
 
 1.  **Sourcing Settings**: `source settings/main.sh` enables strict mode and auto-loads the monad library.
 2.  **Loading Libraries**: Source specialized modules like `lib/gum.sh` or your own custom logic.
@@ -95,7 +92,7 @@ Maintain high standards with built-in quality tools:
 
 ## 🧠 AI Agent Skill Suite
 
-Bashsmith isn't just a template; it's a suite of specialized skills for your AI agents:
+Bashsmithing isn't just a template; it's a suite of specialized skills for your AI agents:
 
 *   **`bashsmithing/`**: The hub skill for project scaffolding.
 *   **`bashsmithing-tui/`**: Specialized in building TUI applications.
@@ -105,8 +102,14 @@ Bashsmith isn't just a template; it's a suite of specialized skills for your AI 
 
 ---
 
-## 📄 License
+## 📄 License & Attribution
 
-This project is licensed under the MIT License - see the [LICENSE.adoc](LICENSE.adoc) file for details.
+This project is licensed under the **MIT License**.
 
-© 2026 [Brooke Kuhlmann](https://www.alchemists.io) & Contributors.
+### Credits
+
+This project is forked from and inspired by the original [Bashsmith](https://github.com/bkuhlmann/bashsmith) project by [Brooke Kuhlmann](https://www.alchemists.io). 
+
+The original template components (located in `LICENSE.adoc`) are subject to the [Hippocratic License 2.1.0](LICENSE.adoc). Users of this derivative project are encouraged to review the ethical standards set forth in that license.
+
+© 2026 [Robert Pannick](https://github.com/b08x) & Contributors.
