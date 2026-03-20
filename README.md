@@ -2,10 +2,13 @@
 
 [![Shellcheck](https://img.shields.io/badge/shellcheck-passed-brightgreen.svg)](https://www.shellcheck.net/)
 [![BATS](https://img.shields.io/badge/tests-BATS-blue.svg)](https://github.com/bats-core/bats-core)
-[![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE.adoc)
+[![License](https://img.shields.io/badge/license-Hippocratic_2.1-red.svg)](LICENSE.adoc)
 [![Bash](https://img.shields.io/badge/bash-4.0%2B-orange.svg)](https://www.gnu.org/software/bash)
 
 **Bashsmith** is a professional-grade project template and AI-powered skill suite for crafting robust, production-ready Bash scripts. It bridges the gap between "quick-and-dirty" scripts and reliable, maintainable software by enforcing strict-mode settings, JSON-based return monads, and a modular TUI architecture.
+
+> [!IMPORTANT]
+> This project is licensed under the **Hippocratic License 2.1.0**, an Ethical Source license that prohibits the use of this software for activities that violate human rights. See [LICENSE.adoc](LICENSE.adoc) for full terms.
 
 > [!NOTE]
 > This project is a specialized derivative based on the [Bashsmith](https://github.com/bkuhlmann/bashsmith) template. While it inherits the core architecture and philosophy of the original, it is maintained as a separate project focused on the Bashsmithing AI skill suite.
