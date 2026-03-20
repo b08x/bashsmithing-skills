@@ -7,6 +7,9 @@
 
 **Bashsmith** is a professional-grade project template and AI-powered skill suite for crafting robust, production-ready Bash scripts. It bridges the gap between "quick-and-dirty" scripts and reliable, maintainable software by enforcing strict-mode settings, JSON-based return monads, and a modular TUI architecture.
 
+> [!NOTE]
+> This project is a specialized derivative based on the [Bashsmith](https://github.com/bkuhlmann/bashsmith) template. While it inherits the core architecture and philosophy of the original, it is maintained as a separate project focused on the Bashsmithing AI skill suite.
+
 ---
 
 ## 🌟 Key Features
